@@ -112,3 +112,9 @@ class MainActivity : AppCompatActivity() {
         spinnerDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
 
 ```
+
+
+**FUTURE PLANS**
+
+-> Multi check options
+-> Searh bar
