@@ -22,7 +22,7 @@ To include `SpinnerDialog` in your project, add the following to your dependenci
 **app/build.gradle**
 ```groovy
 dependencies {
-       implementation 'com.github.hamzaahmedkhan:ShimmerRecyclerView:v0.4.0'
+        implementation 'com.github.hamzaahmedkhan:SpinnerDialog:v1.0'
 }
 ```
 
