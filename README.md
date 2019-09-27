@@ -6,13 +6,13 @@ Android Spinner Dialog Library, Use for single or multi selection of choice
 
 Android UI
 
-<img src='demo/home.gif' height=480 width=240 />
+<img src='demo/home.png' height=480 width=240 />
 
 
-<img src='demo/list_0.gif' height=480 width=240 />
+<img src='demo/list_0.png' height=480 width=240 />
 
 
-<img src='demo/list_1.gif' height=480 width=240 />
+<img src='demo/list_1.png' height=480 width=240 />
 
 
 ## Download
