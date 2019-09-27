@@ -7,9 +7,7 @@ Android Spinner Dialog Library, Use for single or multi selection of choice
 
 
 
-## Switching List and Grid layout demo
-
-Android UI
+## Android UI
 
 <img src='demo/home.png' height=480 width=240 />
 
