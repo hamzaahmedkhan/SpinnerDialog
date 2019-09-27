@@ -54,6 +54,7 @@ class SpinnerDialogFragment : DialogFragment(), OnSpinnerItemClickListener, View
         setListeners()
         if (themeColorResId != -1) {
             contHeader.setBackgroundColor(themeColorResId)
+            btnOK.setBackgroundColor(themeColorResId)
         }
         btnOK.text = buttonText
         txtTitle.text = title

@@ -36,6 +36,12 @@ class MainActivity : AppCompatActivity() {
             )
 
 
+
+        // Using optional features
+        spinnerDialogFragment.buttonText = "SAVE"
+        spinnerDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
+
+
         txtShowSingleChoiceSpinner.setOnClickListener { spinnerDialogFragment.show(supportFragmentManager, "SpinnerDialogFragment") }
         txtShowMultiChoiceSpinner.setOnClickListener { Toast.makeText(applicationContext, "In Progress", Toast.LENGTH_LONG).show() }
     }

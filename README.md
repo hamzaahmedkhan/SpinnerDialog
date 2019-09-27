@@ -98,3 +98,14 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
+
+
+
+**EXTRA ATTRIBUTES**
+```kotlin
+
+        // Using optional features
+        spinnerDialogFragment.buttonText = "SAVE"
+        spinnerDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
+
+```
