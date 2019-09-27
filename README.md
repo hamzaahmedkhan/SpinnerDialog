@@ -1,6 +1,9 @@
 # SpinnerDialog
 Android Spinner Dialog Library, Use for single or multi selection of choice
 
+[![](https://jitpack.io/v/hamzaahmedkhan/SpinnerDialog.svg)](https://jitpack.io/#hamzaahmedkhan/SpinnerDialog)
+
+
 
 ## Switching List and Grid layout demo
 
