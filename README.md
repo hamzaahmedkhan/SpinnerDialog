@@ -118,3 +118,4 @@ class MainActivity : AppCompatActivity() {
 
 -> Multi check options
 -> Searh bar
+-> UI enhancement
