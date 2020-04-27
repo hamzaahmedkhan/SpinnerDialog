@@ -23,9 +23,12 @@ class SpinnerDialogFragment : DialogFragment(), OnSpinnerItemClickListener, View
     private var scrollToPosition: Int = 0
     private var selectedPosition = 0
     private var selectedSpinnerModel: SpinnerModel? = null
+
+
     var title = ""
     var themeColorResId: Int = -1
     var buttonText: String = "OK"
+    var showSearchBar = true
 
     override fun onStart() {
         super.onStart()
@@ -55,6 +58,12 @@ class SpinnerDialogFragment : DialogFragment(), OnSpinnerItemClickListener, View
         if (themeColorResId != -1) {
             contHeader.setBackgroundColor(themeColorResId)
             btnOK.setBackgroundColor(themeColorResId)
+        }
+
+        if (showSearchBar){
+            contSearchBar.visibility = View.VISIBLE
+        } else {
+            contSearchBar.visibility = View.GONE
         }
         btnOK.text = buttonText
         txtTitle.text = title
