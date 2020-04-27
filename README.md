@@ -18,7 +18,7 @@ Android Spinner Dialog Library, Use for single or multi selection of choice
 <img src='demo/list_1.png' height=480 width=240 />
 
 
-<img src='demo/list_3.png' height=480 width=240 />
+<img src='demo/list_2.png' height=480 width=240 />
 
 
 ## Download
