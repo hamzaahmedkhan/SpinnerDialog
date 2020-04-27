@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         // Using optional features
         spinnerDialogFragment.buttonText = "SAVE"
         spinnerDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
+        spinnerDialogFragment.showSearchBar = true
+        spinnerDialogFragment.searchbarHint = "type here to search.."
 
 
         txtShowSingleChoiceSpinner.setOnClickListener { spinnerDialogFragment.show(supportFragmentManager, "SpinnerDialogFragment") }

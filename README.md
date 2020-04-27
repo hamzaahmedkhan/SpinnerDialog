@@ -25,7 +25,7 @@ To include `SpinnerDialog` in your project, add the following to your dependenci
 **app/build.gradle**
 ```groovy
 dependencies {
-        implementation 'com.github.hamzaahmedkhan:SpinnerDialog:v1.0'
+        implementation 'com.github.hamzaahmedkhan:SpinnerDialog:v1.1.0'
 }
 ```
 
@@ -110,6 +110,8 @@ class MainActivity : AppCompatActivity() {
         // Using optional features
         spinnerDialogFragment.buttonText = "SAVE"
         spinnerDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
+        spinnerDialogFragment.showSearchBar = true
+        spinnerDialogFragment.searchbarHint = "type here to search.."
 
 ```
 
@@ -117,5 +119,4 @@ class MainActivity : AppCompatActivity() {
 **FUTURE PLANS**
 
 -> Multi check options
--> Searh bar
--> UI enhancement
+-> Description option
