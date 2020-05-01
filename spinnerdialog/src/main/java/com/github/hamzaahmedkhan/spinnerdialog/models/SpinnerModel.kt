@@ -1,4 +1,4 @@
-package com.github.hamzaahmedkhan.spinnerdialog
+package com.github.hamzaahmedkhan.spinnerdialog.models
 
 class SpinnerModel(var text: String) {
 

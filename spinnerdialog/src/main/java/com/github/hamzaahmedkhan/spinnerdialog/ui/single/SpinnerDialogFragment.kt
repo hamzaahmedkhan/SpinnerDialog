@@ -1,4 +1,4 @@
-package com.github.hamzaahmedkhan.spinnerdialog
+package com.github.hamzaahmedkhan.spinnerdialog.ui.single
 
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
@@ -10,6 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import com.github.hamzaahmedkhan.spinnerdialog.R
+import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerItemClickListener
+import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerOKPressedListener
+import com.github.hamzaahmedkhan.spinnerdialog.models.SpinnerModel
 import kotlinx.android.synthetic.main.fragment_spinner_popup.*
 import kotlin.collections.ArrayList
 
@@ -17,9 +21,10 @@ import kotlin.collections.ArrayList
  * Created by khanhamza on 21-Feb-17.
  */
 
-class SpinnerDialogFragment : DialogFragment(), OnSpinnerItemClickListener, View.OnClickListener {
+class SpinnerDialogFragment : DialogFragment(),
+    OnSpinnerItemClickListener, View.OnClickListener {
 
-    private var adapter: SpinnerDialogAdapter? = null
+    private var singleSelectAdapter: SpinnerDialogSingleSelectAdapter? = null
     private var arrData: ArrayList<SpinnerModel> = ArrayList()
     private var arrFilteredData: ArrayList<SpinnerModel> = ArrayList()
     private var onSpinnerOKPressedListener: OnSpinnerOKPressedListener? = null
@@ -44,7 +49,9 @@ class SpinnerDialogFragment : DialogFragment(), OnSpinnerItemClickListener, View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.DialogTheme)
+        setStyle(STYLE_NO_TITLE,
+            R.style.DialogTheme
+        )
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -83,7 +90,12 @@ class SpinnerDialogFragment : DialogFragment(), OnSpinnerItemClickListener, View
         edtSearch.hint = searchbarHint
 
         // init Adapter
-        adapter = SpinnerDialogAdapter(activity, arrFilteredData, this)
+        singleSelectAdapter =
+            SpinnerDialogSingleSelectAdapter(
+                activity,
+                arrFilteredData,
+                this
+            )
 
         bindView()
     }
@@ -108,10 +120,11 @@ class SpinnerDialogFragment : DialogFragment(), OnSpinnerItemClickListener, View
         val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = mLayoutManager
         (recyclerView.itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
-        val resId = R.anim.layout_animation_fall_bottom
+        val resId =
+            R.anim.layout_animation_fall_bottom
         val animation = AnimationUtils.loadLayoutAnimation(context, resId)
         recyclerView.layoutAnimation = animation
-        recyclerView.adapter = adapter
+        recyclerView.adapter = singleSelectAdapter
         scrollToPosition(scrollToPosition)
 
     }
@@ -135,7 +148,7 @@ class SpinnerDialogFragment : DialogFragment(), OnSpinnerItemClickListener, View
 
         }
 
-        adapter?.notifyDataSetChanged()
+        singleSelectAdapter?.notifyDataSetChanged()
     }
 
 
@@ -146,7 +159,7 @@ class SpinnerDialogFragment : DialogFragment(), OnSpinnerItemClickListener, View
         this.dismiss()
     }
 
-    override fun onItemClick(position: Int, anyObject: Any, adapter: SpinnerDialogAdapter) {
+    override fun onItemClick(position: Int, anyObject: Any, singleSelectAdapter: SpinnerDialogSingleSelectAdapter) {
         selectedPosition = arrData.indexOf(anyObject as SpinnerModel)
 
         // Set selected from all data
@@ -159,12 +172,13 @@ class SpinnerDialogFragment : DialogFragment(), OnSpinnerItemClickListener, View
 
         selectedSpinnerModel = anyObject
 
-        adapter.notifyDataSetChanged()
+        singleSelectAdapter.notifyDataSetChanged()
     }
 
     companion object {
         fun newInstance(title: String, arrData: ArrayList<SpinnerModel>, onSpinnerOKPressedListener: OnSpinnerOKPressedListener, scrollToPosition: Int): SpinnerDialogFragment {
-            val frag = SpinnerDialogFragment()
+            val frag =
+                SpinnerDialogFragment()
             val args = Bundle()
             frag.title = title
             frag.arrData.addAll(arrData)

@@ -3,9 +3,9 @@ package com.github.hamzaahmedkhan
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.github.hamzaahmedkhan.spinnerdialog.OnSpinnerOKPressedListener
-import com.github.hamzaahmedkhan.spinnerdialog.SpinnerDialogFragment
-import com.github.hamzaahmedkhan.spinnerdialog.SpinnerModel
+import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerOKPressedListener
+import com.github.hamzaahmedkhan.spinnerdialog.ui.single.SpinnerDialogFragment
+import com.github.hamzaahmedkhan.spinnerdialog.models.SpinnerModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +19,11 @@ class MainActivity : AppCompatActivity() {
         val arraySpinnerModel: ArrayList<SpinnerModel> = ArrayList()
 
         for (i in 1..9) {
-            arraySpinnerModel.add(SpinnerModel("Number $i"))
+            arraySpinnerModel.add(
+                SpinnerModel(
+                    "Number $i"
+                )
+            )
         }
 
 
@@ -27,7 +31,8 @@ class MainActivity : AppCompatActivity() {
         val spinnerDialogFragment =
             SpinnerDialogFragment.newInstance(
                 "Spinner Dialog", arraySpinnerModel,
-                object : OnSpinnerOKPressedListener {
+                object :
+                    OnSpinnerOKPressedListener {
                     override fun onItemSelect(data: SpinnerModel, selectedPosition: Int) {
                         Toast.makeText(applicationContext, data.text, Toast.LENGTH_LONG).show()
                     }

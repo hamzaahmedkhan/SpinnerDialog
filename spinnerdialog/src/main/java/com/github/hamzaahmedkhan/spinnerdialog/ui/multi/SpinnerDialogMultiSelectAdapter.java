@@ -1,31 +1,30 @@
-package com.github.hamzaahmedkhan.spinnerdialog;
-
+package com.github.hamzaahmedkhan.spinnerdialog.ui.multi;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.github.hamzaahmedkhan.spinnerdialog.R;
+import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerItemCheckboxClickListener;
+import com.github.hamzaahmedkhan.spinnerdialog.models.SpinnerModel;
 
 import java.util.ArrayList;
 
+
 /**
- *
  */
-public class SpinnerDialogAdapter extends RecyclerView.Adapter<SpinnerDialogAdapter.ViewHolder> {
+public class SpinnerDialogMultiSelectAdapter extends RecyclerView.Adapter<SpinnerDialogMultiSelectAdapter.ViewHolder> {
 
-
-    private final OnSpinnerItemClickListener onItemClick;
-
-
+    private final OnSpinnerItemCheckboxClickListener onItemClick;
     private Activity activity;
     private ArrayList<SpinnerModel> arrData;
 
-    public SpinnerDialogAdapter(Activity activity, ArrayList<SpinnerModel> arrayList, OnSpinnerItemClickListener onItemClickListener) {
+    public SpinnerDialogMultiSelectAdapter(Activity activity, ArrayList<SpinnerModel> arrayList, OnSpinnerItemCheckboxClickListener onItemClickListener) {
         this.arrData = arrayList;
         this.activity = activity;
         this.onItemClick = onItemClickListener;
@@ -36,7 +35,7 @@ public class SpinnerDialogAdapter extends RecyclerView.Adapter<SpinnerDialogAdap
 
         View itemView;
         itemView = LayoutInflater.from(activity)
-                .inflate(R.layout.item_spinner_dialog, parent, false);
+                .inflate(R.layout.item_spinner_dialog_with_checkbox, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -47,13 +46,14 @@ public class SpinnerDialogAdapter extends RecyclerView.Adapter<SpinnerDialogAdap
 
         holder.txtChoice.setText(model.getText());
         if (model.isSelected()) {
-            holder.radioButton.setChecked(true);
-        } else {
-            holder.radioButton.setChecked(false);
+            holder.checkbox.setChecked(true);
         }
-        holder.contParentLayout.setOnClickListener(view -> onItemClick.onItemClick(holder.getAdapterPosition(), model, SpinnerDialogAdapter.this));
-
-
+        else {
+            holder.checkbox.setChecked(false);
+        }
+        holder.contParentLayout.setOnClickListener(view -> {
+            onItemClick.onItemClick(holder.getAdapterPosition(), model, SpinnerDialogMultiSelectAdapter.this);
+        });
     }
 
     public void addItem(ArrayList<SpinnerModel> homeCategories) {
@@ -70,18 +70,16 @@ public class SpinnerDialogAdapter extends RecyclerView.Adapter<SpinnerDialogAdap
         return arrData.size();
     }
 
-
     static class ViewHolder extends RecyclerView.ViewHolder {
-        RadioButton radioButton;
+        CheckBox checkbox;
         TextView txtChoice;
         LinearLayout contParentLayout;
 
-        ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            radioButton = itemView.findViewById(R.id.radioButton);
-            txtChoice = itemView.findViewById(R.id.txtChoice);
-            contParentLayout = itemView.findViewById(R.id.contParentLayout);
+        ViewHolder(View view) {
+            super(view);
+            checkbox = view.findViewById(R.id.txtChoice);
+            txtChoice = view.findViewById(R.id.checkbox);
+            contParentLayout = view.findViewById(R.id.contParentLayout);
         }
     }
 }
