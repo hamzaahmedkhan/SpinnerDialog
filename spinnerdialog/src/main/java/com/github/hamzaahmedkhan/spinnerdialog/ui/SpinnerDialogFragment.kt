@@ -1,10 +1,9 @@
-package com.github.hamzaahmedkhan.spinnerdialog.ui.single
+package com.github.hamzaahmedkhan.spinnerdialog.ui
 
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -17,6 +16,7 @@ import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerItemClickListe
 import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerOKPressedListener
 import com.github.hamzaahmedkhan.spinnerdialog.models.SpinnerModel
 import com.github.hamzaahmedkhan.spinnerdialog.ui.multi.SpinnerDialogMultiSelectAdapter
+import com.github.hamzaahmedkhan.spinnerdialog.ui.single.SpinnerDialogSingleSelectAdapter
 import kotlinx.android.synthetic.main.fragment_spinner_popup.*
 import kotlin.collections.ArrayList
 
@@ -42,7 +42,8 @@ class SpinnerDialogFragment : DialogFragment(),
     var themeColorResId: Int = -1
     var buttonText: String = "OK"
     var showSearchBar = true
-    var mode = SINGLE_SELECT_MODE
+    var mode =
+        SINGLE_SELECT_MODE
 
     override fun onStart() {
         super.onStart()
@@ -95,7 +96,7 @@ class SpinnerDialogFragment : DialogFragment(),
         edtSearch.hint = searchbarHint
 
         // init Adapter
-        if (mode==SINGLE_SELECT_MODE) {
+        if (mode== SINGLE_SELECT_MODE) {
             singleSelectAdapter =
                 SpinnerDialogSingleSelectAdapter(
                     activity,
@@ -133,7 +134,7 @@ class SpinnerDialogFragment : DialogFragment(),
             R.anim.layout_animation_fall_bottom
         val animation = AnimationUtils.loadLayoutAnimation(context, resId)
         recyclerView.layoutAnimation = animation
-        recyclerView.adapter = if (mode==SINGLE_SELECT_MODE) singleSelectAdapter else multiSelectAdapter
+        recyclerView.adapter = if (mode== SINGLE_SELECT_MODE) singleSelectAdapter else multiSelectAdapter
         scrollToPosition(scrollToPosition)
     }
 
@@ -154,7 +155,7 @@ class SpinnerDialogFragment : DialogFragment(),
             arrFilteredData.clear()
             arrFilteredData.addAll(arrData.filter { it.text.contains(filterText,true) || it.descrition.contains(filterText, true) })
         }
-        if (mode==SINGLE_SELECT_MODE) {
+        if (mode== SINGLE_SELECT_MODE) {
             singleSelectAdapter?.notifyDataSetChanged()
         }else{
             multiSelectAdapter?.notifyDataSetChanged()
