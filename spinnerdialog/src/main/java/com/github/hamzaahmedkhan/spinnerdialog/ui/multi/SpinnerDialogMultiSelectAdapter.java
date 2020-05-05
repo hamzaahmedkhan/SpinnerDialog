@@ -52,6 +52,8 @@ public class SpinnerDialogMultiSelectAdapter extends RecyclerView.Adapter<Spinne
             holder.checkbox.setChecked(false);
         }
         holder.contParentLayout.setOnClickListener(view -> {
+            holder.checkbox.setChecked(!holder.checkbox.isChecked());
+            model.setSelected(!model.isSelected());
             onItemClick.onItemClick(holder.getAdapterPosition(), model, SpinnerDialogMultiSelectAdapter.this);
         });
     }
@@ -77,8 +79,8 @@ public class SpinnerDialogMultiSelectAdapter extends RecyclerView.Adapter<Spinne
 
         ViewHolder(View view) {
             super(view);
-            checkbox = view.findViewById(R.id.txtChoice);
-            txtChoice = view.findViewById(R.id.checkbox);
+            checkbox = view.findViewById(R.id.checkbox);
+            txtChoice = view.findViewById(R.id.txtChoice);
             contParentLayout = view.findViewById(R.id.contParentLayout);
         }
     }

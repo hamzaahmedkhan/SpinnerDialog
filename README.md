@@ -56,11 +56,16 @@ public class MainActivity extends Activity {
                arrSpinners.add(new SpinnerModel("Number " + i));
            }
         
-           // Init Fragment
-           SpinnerDialogFragment spinnerDialogFragment = SpinnerDialogFragment.Companion.newInstance("Demo", arrSpinners, (data, selectedPosition) -> UIHelper.showToast(getContext(), data.getText()), 0);
+           // Init single select Fragment
+           SpinnerDialogFragment spinnerSingleSelectDialogFragment = SpinnerDialogFragment.Companion.newInstance(SpinnerDialogFragment.Companion.SINGLE_SELECT_MODE,"Demo", arrSpinners, (data, selectedPosition) -> UIHelper.showToast(getContext(), data.getText()), 0);
            
-           // Show Fragment
-           spinnerDialogFragment.show(getActivity().getSupportFragmentManager(), "spinnerDialog");
+           // Init multi select Fragment
+           SpinnerDialogFragment spinnerMultiSelectDialogFragment = SpinnerDialogFragment.Companion.newInstance(SpinnerDialogFragment.Companion.MULTI_SELECT_MODE,"Demo", arrSpinners, (data, selectedPosition) -> UIHelper.showToast(getContext(), data.getText()), 0);
+           
+           // Show single select Fragment
+           spinnerSingleSelectDialogFragment.show(getActivity().getSupportFragmentManager(), "spinnerDialog");
+           // Or for multi select Fragment
+           spinnerMultiSelectDialogFragment.show(getActivity().getSupportFragmentManager(), "spinnerDialog");
 
     }
 }
@@ -86,11 +91,12 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // Init Fragment
-        val spinnerDialogFragment =
+        // Init single select Fragment
+        val spinnerSingleSelectDialogFragment =
             SpinnerDialogFragment.newInstance(
-                "Spinner Dialog", arraySpinnerModel,
-                object : OnSpinnerOKPressedListener {
+                SpinnerDialogFragment.SINGLE_SELECT_MODE,"Spinner Dialog", arraySpinnerModel,
+                object :
+                    OnSpinnerOKPressedListener {
                     override fun onItemSelect(data: SpinnerModel, selectedPosition: Int) {
                         Toast.makeText(applicationContext, data.text, Toast.LENGTH_LONG).show()
                     }
@@ -99,8 +105,22 @@ class MainActivity : AppCompatActivity() {
             )
 
 
-        txtShowSingleChoiceSpinner.setOnClickListener { spinnerDialogFragment.show(supportFragmentManager, "SpinnerDialogFragment") }
-        txtShowMultiChoiceSpinner.setOnClickListener { Toast.makeText(applicationContext, "In Progress", Toast.LENGTH_LONG).show() }
+        // Init multi select Fragment
+        val spinnerMultiSelectDialogFragment =
+            SpinnerDialogFragment.newInstance(
+                SpinnerDialogFragment.MULTI_SELECT_MODE,"Spinner Dialog", arraySpinnerModel,
+                object :
+                    OnSpinnerOKPressedListener {
+                    override fun onItemSelect(data: SpinnerModel, selectedPosition: Int) {
+                        Toast.makeText(applicationContext, data.text, Toast.LENGTH_LONG).show()
+                    }
+
+                }, 0
+            )
+
+
+        txtShowSingleChoiceSpinner.setOnClickListener { spinnerSingleSelectDialogFragment.show(supportFragmentManager, "SpinnerDialogFragment") }
+        txtShowMultiChoiceSpinner.setOnClickListener { spinnerMultiSelectDialogFragment.show(supportFragmentManager, "SpinnerDialogFragment") }
     }
 }
 ```
@@ -110,16 +130,22 @@ class MainActivity : AppCompatActivity() {
 **EXTRA ATTRIBUTES**
 ```kotlin
 
-        // Using optional features
-        spinnerDialogFragment.buttonText = "SAVE"
-        spinnerDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
-        spinnerDialogFragment.showSearchBar = true
-        spinnerDialogFragment.searchbarHint = "type here to search.."
+        // Using optional features for single select dialog
+        spinnerSingleSelectDialogFragment.buttonText = "SAVE"
+        spinnerSingleSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
+        spinnerSingleSelectDialogFragment.showSearchBar = true
+        spinnerSingleSelectDialogFragment.searchbarHint = "type here to search.."
+
+
+        // Using optional features for multi select dialog
+        spinnerMultiSelectDialogFragment.buttonText = "SAVE"
+        spinnerMultiSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
+        spinnerMultiSelectDialogFragment.showSearchBar = true
+        spinnerMultiSelectDialogFragment.searchbarHint = "type here to search.."
 
 ```
 
 
 **FUTURE PLANS**
 
--> Multi check options
 -> Description option
