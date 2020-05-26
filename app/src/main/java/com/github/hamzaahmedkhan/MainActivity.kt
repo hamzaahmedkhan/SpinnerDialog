@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerOKPressedListener
+import com.github.hamzaahmedkhan.spinnerdialog.enums.SpinnerSelectionType
 import com.github.hamzaahmedkhan.spinnerdialog.ui.SpinnerDialogFragment
 import com.github.hamzaahmedkhan.spinnerdialog.models.SpinnerModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         // Init single select Fragment
         val spinnerSingleSelectDialogFragment =
             SpinnerDialogFragment.newInstance(
-                SpinnerDialogFragment.SINGLE_SELECT_MODE,"Spinner Dialog", arraySpinnerModel,
+                SpinnerSelectionType.SINGLE_SELECTION,"Spinner Dialog", arraySpinnerModel,
                 object :
                     OnSpinnerOKPressedListener {
                     override fun onItemSelect(data: SpinnerModel, selectedPosition: Int) {
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         // Init multi select Fragment
         val spinnerMultiSelectDialogFragment =
             SpinnerDialogFragment.newInstance(
-                SpinnerDialogFragment.MULTI_SELECT_MODE,"Spinner Dialog", arraySpinnerModel,
+                SpinnerSelectionType.MULTI_SELECTION,"Spinner Dialog", arraySpinnerModel,
                 object :
                     OnSpinnerOKPressedListener {
                     override fun onItemSelect(data: SpinnerModel, selectedPosition: Int) {

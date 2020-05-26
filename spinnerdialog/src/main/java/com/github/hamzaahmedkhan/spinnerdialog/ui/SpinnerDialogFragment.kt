@@ -14,6 +14,7 @@ import com.github.hamzaahmedkhan.spinnerdialog.R
 import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerItemCheckboxClickListener
 import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerItemClickListener
 import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerOKPressedListener
+import com.github.hamzaahmedkhan.spinnerdialog.enums.SpinnerSelectionType
 import com.github.hamzaahmedkhan.spinnerdialog.models.SpinnerModel
 import com.github.hamzaahmedkhan.spinnerdialog.ui.multi.SpinnerDialogMultiSelectAdapter
 import com.github.hamzaahmedkhan.spinnerdialog.ui.single.SpinnerDialogSingleSelectAdapter
@@ -42,26 +43,31 @@ class SpinnerDialogFragment : DialogFragment(),
     var themeColorResId: Int = -1
     var buttonText: String = "OK"
     var showSearchBar = true
-    var mode =
-        SINGLE_SELECT_MODE
+    var spinnerSelectionType =
+        SpinnerSelectionType.SINGLE_SELECTION
 
     override fun onStart() {
         super.onStart()
 
         dialog.window!!
-                .setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT)
+            .setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE,
+        setStyle(
+            STYLE_NO_TITLE,
             R.style.DialogTheme
         )
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         val view = inflater.inflate(R.layout.fragment_spinner_popup, container)
         return view
@@ -82,7 +88,7 @@ class SpinnerDialogFragment : DialogFragment(),
 
 
         // Show Search bar if true
-        if (showSearchBar){
+        if (showSearchBar) {
             contSearchBar.visibility = View.VISIBLE
         } else {
             contSearchBar.visibility = View.GONE
@@ -96,15 +102,15 @@ class SpinnerDialogFragment : DialogFragment(),
         edtSearch.hint = searchbarHint
 
         // init Adapter
-        if (mode== SINGLE_SELECT_MODE) {
+        if (spinnerSelectionType == SpinnerSelectionType.SINGLE_SELECTION) {
             singleSelectAdapter =
                 SpinnerDialogSingleSelectAdapter(
                     activity,
                     arrFilteredData,
                     this
                 )
-        }else{
-            multiSelectAdapter = SpinnerDialogMultiSelectAdapter(activity,arrFilteredData,this)
+        } else {
+            multiSelectAdapter = SpinnerDialogMultiSelectAdapter(activity, arrFilteredData, this)
         }
 
         bindView()
@@ -113,7 +119,7 @@ class SpinnerDialogFragment : DialogFragment(),
     private fun setListeners() {
         btnOK.setOnClickListener(this)
 
-        edtSearch.addTextChangedListener(object : TextWatcher{
+        edtSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -134,7 +140,8 @@ class SpinnerDialogFragment : DialogFragment(),
             R.anim.layout_animation_fall_bottom
         val animation = AnimationUtils.loadLayoutAnimation(context, resId)
         recyclerView.layoutAnimation = animation
-        recyclerView.adapter = if (mode== SINGLE_SELECT_MODE) singleSelectAdapter else multiSelectAdapter
+        recyclerView.adapter =
+            if (spinnerSelectionType == SpinnerSelectionType.SINGLE_SELECTION) singleSelectAdapter else multiSelectAdapter
         scrollToPosition(scrollToPosition)
     }
 
@@ -147,17 +154,22 @@ class SpinnerDialogFragment : DialogFragment(),
 
     }
 
-    fun setFilterData(filterText:String?){
-        if (filterText.isNullOrEmpty()){
+    fun setFilterData(filterText: String?) {
+        if (filterText.isNullOrEmpty()) {
             arrFilteredData.clear()
             arrFilteredData.addAll(arrData)
         } else {
             arrFilteredData.clear()
-            arrFilteredData.addAll(arrData.filter { it.text.contains(filterText,true) || it.descrition.contains(filterText, true) })
+            arrFilteredData.addAll(arrData.filter {
+                it.text.contains(
+                    filterText,
+                    true
+                ) || it.descrition.contains(filterText, true)
+            })
         }
-        if (mode== SINGLE_SELECT_MODE) {
+        if (spinnerSelectionType == SpinnerSelectionType.SINGLE_SELECTION) {
             singleSelectAdapter?.notifyDataSetChanged()
-        }else{
+        } else {
             multiSelectAdapter?.notifyDataSetChanged()
         }
     }
@@ -165,12 +177,21 @@ class SpinnerDialogFragment : DialogFragment(),
 
     override fun onClick(v: View?) {
         if (onSpinnerOKPressedListener != null) {
-            selectedSpinnerModel?.let { onSpinnerOKPressedListener!!.onItemSelect(it, selectedPosition) }
+            selectedSpinnerModel?.let {
+                onSpinnerOKPressedListener!!.onItemSelect(
+                    it,
+                    selectedPosition
+                )
+            }
         }
         this.dismiss()
     }
 
-    override fun onItemClick(position: Int, anyObject: Any, singleSelectAdapter: SpinnerDialogSingleSelectAdapter) {
+    override fun onItemClick(
+        position: Int,
+        anyObject: Any,
+        singleSelectAdapter: SpinnerDialogSingleSelectAdapter
+    ) {
         selectedPosition = arrData.indexOf(anyObject as SpinnerModel)
 
         // Set selected from all data
@@ -187,7 +208,13 @@ class SpinnerDialogFragment : DialogFragment(),
     }
 
     companion object {
-        fun newInstance(mode: Int,title: String, arrData: ArrayList<SpinnerModel>, onSpinnerOKPressedListener: OnSpinnerOKPressedListener, scrollToPosition: Int): SpinnerDialogFragment {
+        fun newInstance(
+            spinnerSelectionType: SpinnerSelectionType,
+            title: String,
+            arrData: ArrayList<SpinnerModel>,
+            onSpinnerOKPressedListener: OnSpinnerOKPressedListener,
+            scrollToPosition: Int
+        ): SpinnerDialogFragment {
             val frag =
                 SpinnerDialogFragment()
             val args = Bundle()
@@ -197,12 +224,10 @@ class SpinnerDialogFragment : DialogFragment(),
             frag.scrollToPosition = scrollToPosition
             frag.onSpinnerOKPressedListener = onSpinnerOKPressedListener
             frag.arguments = args
-            frag.mode = mode
+            frag.spinnerSelectionType = spinnerSelectionType
 
             return frag
         }
-        const val SINGLE_SELECT_MODE = 0
-        const val MULTI_SELECT_MODE = 1
     }
 
     override fun onItemClick(
