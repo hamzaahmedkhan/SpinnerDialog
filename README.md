@@ -21,6 +21,9 @@ Android Spinner Dialog Library, Use for single or multi selection of choice
 <img src='demo/list_2.png' height=480 width=240 />
 
 
+<img src='demo/list_3.png' height=480 width=240 />
+
+
 ## Download
 
 To include `SpinnerDialog` in your project, add the following to your dependencies:
@@ -28,7 +31,7 @@ To include `SpinnerDialog` in your project, add the following to your dependenci
 **app/build.gradle**
 ```groovy
 dependencies {
-        implementation 'com.github.hamzaahmedkhan:SpinnerDialog:v1.1.0'
+        implementation 'com.github.hamzaahmedkhan:SpinnerDialog:v1.2.0'
 }
 ```
 
@@ -94,11 +97,18 @@ class MainActivity : AppCompatActivity() {
         // Init single select Fragment
         val spinnerSingleSelectDialogFragment =
             SpinnerDialogFragment.newInstance(
-                SpinnerDialogFragment.SINGLE_SELECT_MODE,"Spinner Dialog", arraySpinnerModel,
+                SpinnerSelectionType.SINGLE_SELECTION,"Spinner Dialog", arraySpinnerModel,
                 object :
                     OnSpinnerOKPressedListener {
-                    override fun onItemSelect(data: SpinnerModel, selectedPosition: Int) {
+                    override fun onSingleSelection(data: SpinnerModel, selectedPosition: Int) {
                         Toast.makeText(applicationContext, data.text, Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onMultiSelection(
+                        data: List<SpinnerModel>,
+                        selectedPosition: Int
+                    ) {
+                        // It will never send Multi selection data in SINGLE_SELECTION Mode
                     }
 
                 }, 0
@@ -108,19 +118,27 @@ class MainActivity : AppCompatActivity() {
         // Init multi select Fragment
         val spinnerMultiSelectDialogFragment =
             SpinnerDialogFragment.newInstance(
-                SpinnerDialogFragment.MULTI_SELECT_MODE,"Spinner Dialog", arraySpinnerModel,
+                SpinnerSelectionType.MULTI_SELECTION,"Spinner Dialog", arraySpinnerModel,
                 object :
                     OnSpinnerOKPressedListener {
-                    override fun onItemSelect(data: SpinnerModel, selectedPosition: Int) {
+                    override fun onSingleSelection(data: SpinnerModel, selectedPosition: Int) {
                         Toast.makeText(applicationContext, data.text, Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onMultiSelection(
+                        data: List<SpinnerModel>,
+                        selectedPosition: Int
+                    ) {
+                        Toast.makeText(applicationContext, data.map { it.text }.joinToString(" - "), Toast.LENGTH_LONG).show()
                     }
 
                 }, 0
             )
 
 
-        txtShowSingleChoiceSpinner.setOnClickListener { spinnerSingleSelectDialogFragment.show(supportFragmentManager, "SpinnerDialogFragment") }
-        txtShowMultiChoiceSpinner.setOnClickListener { spinnerMultiSelectDialogFragment.show(supportFragmentManager, "SpinnerDialogFragment") }
+
+        txtShowSingleChoiceSpinner.setOnClickListener { spinnerSingleSelectDialogFragment.show(supportFragmentManager, "SpinnerDialogFragmentSingle") }
+        txtShowMultiChoiceSpinner.setOnClickListener { spinnerMultiSelectDialogFragment.show(supportFragmentManager, "SpinnerDialogFragmentMulti") }
     }
 }
 ```
