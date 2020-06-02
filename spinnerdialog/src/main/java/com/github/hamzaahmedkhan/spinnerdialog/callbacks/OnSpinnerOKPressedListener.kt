@@ -4,5 +4,6 @@ import com.github.hamzaahmedkhan.spinnerdialog.models.SpinnerModel
 
 
 interface OnSpinnerOKPressedListener {
-    fun onItemSelect(data: SpinnerModel, selectedPosition: Int)
+    fun onSingleSelection(data: SpinnerModel, selectedPosition: Int)
+    fun onMultiSelection(data: List<SpinnerModel>, selectedPosition: Int)
 }

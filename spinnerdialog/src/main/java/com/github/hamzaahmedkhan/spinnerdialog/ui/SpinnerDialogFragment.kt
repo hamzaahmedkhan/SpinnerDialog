@@ -35,8 +35,6 @@ class SpinnerDialogFragment : DialogFragment(),
     private var onSpinnerOKPressedListener: OnSpinnerOKPressedListener? = null
     private var scrollToPosition: Int = 0
     private var selectedPosition = 0
-    private var selectedSpinnerModel: SpinnerModel? = null
-
 
     var title = ""
     var searchbarHint = "type here to search..."
@@ -177,11 +175,18 @@ class SpinnerDialogFragment : DialogFragment(),
 
     override fun onClick(v: View?) {
         if (onSpinnerOKPressedListener != null) {
-            selectedSpinnerModel?.let {
-                onSpinnerOKPressedListener!!.onItemSelect(
-                    it,
-                    selectedPosition
-                )
+            arrData.filter { it.isSelected }.let {
+                if (it.size > 1) {
+                    onSpinnerOKPressedListener!!.onMultiSelection(
+                        it,
+                        selectedPosition
+                    )
+                } else if (it.size == 1) {
+                    onSpinnerOKPressedListener!!.onSingleSelection(
+                        it.first(),
+                        selectedPosition
+                    )
+                }
             }
         }
         this.dismiss()
@@ -201,8 +206,6 @@ class SpinnerDialogFragment : DialogFragment(),
         // Set selected in Filtered data
         arrFilteredData.forEach { it.isSelected = false }
         arrFilteredData[position].isSelected = true
-
-        selectedSpinnerModel = anyObject
 
         singleSelectAdapter.notifyDataSetChanged()
     }

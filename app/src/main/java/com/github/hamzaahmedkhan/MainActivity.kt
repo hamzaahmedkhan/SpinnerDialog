@@ -34,8 +34,15 @@ class MainActivity : AppCompatActivity() {
                 SpinnerSelectionType.SINGLE_SELECTION,"Spinner Dialog", arraySpinnerModel,
                 object :
                     OnSpinnerOKPressedListener {
-                    override fun onItemSelect(data: SpinnerModel, selectedPosition: Int) {
+                    override fun onSingleSelection(data: SpinnerModel, selectedPosition: Int) {
                         Toast.makeText(applicationContext, data.text, Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onMultiSelection(
+                        data: List<SpinnerModel>,
+                        selectedPosition: Int
+                    ) {
+                        // It will never send Multi selection data in SINGLE_SELECTION Mode
                     }
 
                 }, 0
@@ -48,8 +55,15 @@ class MainActivity : AppCompatActivity() {
                 SpinnerSelectionType.MULTI_SELECTION,"Spinner Dialog", arraySpinnerModel,
                 object :
                     OnSpinnerOKPressedListener {
-                    override fun onItemSelect(data: SpinnerModel, selectedPosition: Int) {
+                    override fun onSingleSelection(data: SpinnerModel, selectedPosition: Int) {
                         Toast.makeText(applicationContext, data.text, Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onMultiSelection(
+                        data: List<SpinnerModel>,
+                        selectedPosition: Int
+                    ) {
+                        Toast.makeText(applicationContext, data.map { it.text }.joinToString(" - "), Toast.LENGTH_LONG).show()
                     }
 
                 }, 0
@@ -58,14 +72,14 @@ class MainActivity : AppCompatActivity() {
 
 
         // Using optional features for single select dialog
-        spinnerSingleSelectDialogFragment.buttonText = "SAVE"
+        spinnerSingleSelectDialogFragment.buttonText = "DONE"
         spinnerSingleSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
         spinnerSingleSelectDialogFragment.showSearchBar = true
         spinnerSingleSelectDialogFragment.searchbarHint = "type here to search.."
 
 
         // Using optional features for multi select dialog
-        spinnerMultiSelectDialogFragment.buttonText = "SAVE"
+        spinnerMultiSelectDialogFragment.buttonText = "DONE"
         spinnerMultiSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
         spinnerMultiSelectDialogFragment.showSearchBar = true
         spinnerMultiSelectDialogFragment.searchbarHint = "type here to search.."
