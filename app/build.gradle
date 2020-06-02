@@ -46,4 +46,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(path: ':spinnerdialog')
 
+//    implementation 'com.github.hamzaahmedkhan:SpinnerDialog:v1.2.0'
 }

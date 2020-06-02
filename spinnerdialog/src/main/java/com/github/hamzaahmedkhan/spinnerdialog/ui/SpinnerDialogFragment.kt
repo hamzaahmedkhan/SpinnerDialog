@@ -103,12 +103,12 @@ class SpinnerDialogFragment : DialogFragment(),
         if (spinnerSelectionType == SpinnerSelectionType.SINGLE_SELECTION) {
             singleSelectAdapter =
                 SpinnerDialogSingleSelectAdapter(
-                    activity,
+                    context!!,
                     arrFilteredData,
                     this
                 )
         } else {
-            multiSelectAdapter = SpinnerDialogMultiSelectAdapter(activity, arrFilteredData, this)
+            multiSelectAdapter = SpinnerDialogMultiSelectAdapter(context!!, arrFilteredData, this)
         }
 
         bindView()
