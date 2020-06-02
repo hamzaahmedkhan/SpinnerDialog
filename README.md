@@ -39,43 +39,6 @@ dependencies {
 The following snippet shows how you can use Spinner Dialog in your project.
 
 
-**In Java**
-
-```java
-public class MainActivity extends Activity {
-    
-    
-    //... other variables
-    
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-            // Set Data
-            
-           ArrayList<SpinnerModel> arrSpinners = new ArrayList<>();
-        
-           for (int i = 0; i < 5; i++) {
-               arrSpinners.add(new SpinnerModel("Number " + i));
-           }
-        
-           // Init single select Fragment
-           SpinnerDialogFragment spinnerSingleSelectDialogFragment = SpinnerDialogFragment.Companion.newInstance(SpinnerDialogFragment.Companion.SINGLE_SELECT_MODE,"Demo", arrSpinners, (data, selectedPosition) -> UIHelper.showToast(getContext(), data.getText()), 0);
-           
-           // Init multi select Fragment
-           SpinnerDialogFragment spinnerMultiSelectDialogFragment = SpinnerDialogFragment.Companion.newInstance(SpinnerDialogFragment.Companion.MULTI_SELECT_MODE,"Demo", arrSpinners, (data, selectedPosition) -> UIHelper.showToast(getContext(), data.getText()), 0);
-           
-           // Show single select Fragment
-           spinnerSingleSelectDialogFragment.show(getActivity().getSupportFragmentManager(), "spinnerDialog");
-           // Or for multi select Fragment
-           spinnerMultiSelectDialogFragment.show(getActivity().getSupportFragmentManager(), "spinnerDialog");
-
-    }
-}
-```
-
-
-
 **In Kotlin**
 
 ```kotlin
