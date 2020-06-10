@@ -162,7 +162,7 @@ class SpinnerDialogFragment : DialogFragment(),
                 it.text.contains(
                     filterText,
                     true
-                ) || it.descrition.contains(filterText, true)
+                ) || it.description.contains(filterText, true)
             })
         }
         if (spinnerSelectionType == SpinnerSelectionType.SINGLE_SELECTION) {

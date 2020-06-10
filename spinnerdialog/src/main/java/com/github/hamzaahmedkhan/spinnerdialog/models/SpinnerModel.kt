@@ -5,7 +5,7 @@ class SpinnerModel(var text: String) {
     var id: Int = 0
     var isSelected = false
     var positionInList = 0
-    var descrition = ""
+    var description = ""
 
     override fun toString(): String {
         return text
