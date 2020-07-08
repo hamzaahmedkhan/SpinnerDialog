@@ -126,6 +126,44 @@ class MainActivity : AppCompatActivity() {
 
 ```
 
+If you want to use enums list in Enums.
+
+```kotlin
+// Declare enums and override toString
+enum class TestEnum {
+
+    ENUM1 {
+        override fun toString(): String {
+            return "enum1"
+        }
+    },
+
+    ENUM2 {
+        override fun toString(): String {
+            return "enum2"
+        }
+    }
+
+}
+
+
+// initialize spinner ArrayList
+val spinnerData: ArrayList<SpinnerModel> = ArrayList()
+
+// If you want to set enum individually
+val choice1 = TestEnum.ENUM1
+val choice2 = TestEnum.ENUM2
+
+spinnerData.add(SpinnerModel(choice1.toString()))
+spinnerData.add(SpinnerModel(choice2.toString()))
+
+
+// If you want to set all enums values in Spinner
+TestEnum.values().forEach {
+    spinnerData.add(SpinnerModel(it.toString()))
+}
+```
+
 
 **FUTURE PLANS**
 
