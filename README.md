@@ -3,7 +3,7 @@ Android Spinner Dialog Library, Use for single or multi selection of choice
 
 [![](https://jitpack.io/v/hamzaahmedkhan/SpinnerDialog.svg)](https://jitpack.io/#hamzaahmedkhan/SpinnerDialog)
 
-[ ![Download](https://api.bintray.com/packages/hamzaahmedkhan/SpinnerDialog/SpinnerDialog/images/download.svg?version=v1.2.0) ](https://bintray.com/hamzaahmedkhan/SpinnerDialog/SpinnerDialog/v1.2.0/link)
+[ ![Download](https://api.bintray.com/packages/hamzaahmedkhan/SpinnerDialog/SpinnerDialog/images/download.svg?version=v1.2.2) ](https://bintray.com/hamzaahmedkhan/SpinnerDialog/SpinnerDialog/v1.2.2/link)
 
 
 
@@ -31,7 +31,7 @@ To include `SpinnerDialog` in your project, add the following to your dependenci
 **app/build.gradle**
 ```groovy
 dependencies {
-        implementation 'com.github.hamzaahmedkhan:SpinnerDialog:v1.2.1'
+        implementation 'com.github.hamzaahmedkhan:SpinnerDialog:v1.2.2'
 }
 ```
 
@@ -168,6 +168,6 @@ TestEnum.values().forEach {
 ```
 
 
-**FUTURE PLANS**
+**FUTURE RELEASE PLANS**
 
--> Description option
+-> Open issues in Release 1.3.0
