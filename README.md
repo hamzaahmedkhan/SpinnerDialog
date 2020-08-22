@@ -116,6 +116,7 @@ class MainActivity : AppCompatActivity() {
         spinnerSingleSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
         spinnerSingleSelectDialogFragment.showSearchBar = true
         spinnerSingleSelectDialogFragment.searchbarHint = "type here to search.."
+        spinnerSingleSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT) // for dynamic height you can use Integer.dp e.g setDialogHeight(500.dp) or ViewGroup.LayoutParams.WRAP_CONTENT
 
 
         // Using optional features for multi select dialog
@@ -123,6 +124,8 @@ class MainActivity : AppCompatActivity() {
         spinnerMultiSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
         spinnerMultiSelectDialogFragment.showSearchBar = true
         spinnerMultiSelectDialogFragment.searchbarHint = "type here to search.."
+        spinnerSingleSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT) // for dynamic height you can use Integer.dp e.g setDialogHeight(500.dp) or ViewGroup.LayoutParams.WRAP_CONTENT
+
 
 ```
 
