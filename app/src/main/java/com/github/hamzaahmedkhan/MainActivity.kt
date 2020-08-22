@@ -2,9 +2,11 @@ package com.github.hamzaahmedkhan
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.Toast
 import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerOKPressedListener
 import com.github.hamzaahmedkhan.spinnerdialog.enums.SpinnerSelectionType
+import com.github.hamzaahmedkhan.spinnerdialog.extension.dp
 import com.github.hamzaahmedkhan.spinnerdialog.ui.SpinnerDialogFragment
 import com.github.hamzaahmedkhan.spinnerdialog.models.SpinnerModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -76,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         spinnerSingleSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
         spinnerSingleSelectDialogFragment.showSearchBar = true
         spinnerSingleSelectDialogFragment.searchbarHint = "type here to search.."
+        spinnerSingleSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT)
 
 
         // Using optional features for multi select dialog
@@ -83,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         spinnerMultiSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
         spinnerMultiSelectDialogFragment.showSearchBar = true
         spinnerMultiSelectDialogFragment.searchbarHint = "type here to search.."
+        spinnerSingleSelectDialogFragment.setDialogHeight(500.dp)
 
 
         txtShowSingleChoiceSpinner.setOnClickListener { spinnerSingleSelectDialogFragment.show(supportFragmentManager, "SpinnerDialogFragmentSingle") }

@@ -36,6 +36,8 @@ class SpinnerDialogFragment : DialogFragment(),
     private var scrollToPosition: Int = 0
     private var selectedPosition = 0
 
+
+    // Properties
     var title = ""
     var searchbarHint = "type here to search..."
     var themeColorResId: Int = -1
@@ -43,6 +45,7 @@ class SpinnerDialogFragment : DialogFragment(),
     var showSearchBar = true
     var spinnerSelectionType =
         SpinnerSelectionType.SINGLE_SELECTION
+    private var dialogHeight = ViewGroup.LayoutParams.MATCH_PARENT
 
     override fun onStart() {
         super.onStart()
@@ -50,7 +53,7 @@ class SpinnerDialogFragment : DialogFragment(),
         dialog.window!!
             .setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+                dialogHeight
             )
     }
 
@@ -239,6 +242,27 @@ class SpinnerDialogFragment : DialogFragment(),
         adapter: SpinnerDialogMultiSelectAdapter
     ) {
 
+    }
+
+    /**
+     * @param height provide height in Integer
+     *
+     * Provide value in dp to set height of dialog
+     * default value is ViewGroup.LayoutParams.MATCH_PARENT
+     * use ViewGroup.LayoutParams.WRAP_CONTENT to choose height as wrap content.
+     *
+     * If provided height is less than 0, then it will be assigned as MATCH_PARENT.
+     *
+     * You can use extension #{IntegerExtension.Int.dp} to convert integer value into dp. Example 500.dp
+     */
+    fun setDialogHeight(height: Int) {
+        dialogHeight = if (height == ViewGroup.LayoutParams.MATCH_PARENT || height == ViewGroup.LayoutParams.WRAP_CONTENT) {
+            height
+        } else if (height < 0) {
+            ViewGroup.LayoutParams.MATCH_PARENT
+        } else {
+            height
+        }
     }
 
 
