@@ -1,6 +1,6 @@
 package com.github.hamzaahmedkhan
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Toast
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         spinnerSingleSelectDialogFragment.buttonText = "DONE"
         spinnerSingleSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
         spinnerSingleSelectDialogFragment.showSearchBar = true
-        spinnerSingleSelectDialogFragment.searchbarHint = "type here to search.."
+        spinnerSingleSelectDialogFragment.searchbarHint = "Type here to search.."
         spinnerSingleSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT)
 
 
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         spinnerMultiSelectDialogFragment.buttonText = "DONE"
         spinnerMultiSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
         spinnerMultiSelectDialogFragment.showSearchBar = true
-        spinnerMultiSelectDialogFragment.searchbarHint = "type here to search.."
+        spinnerMultiSelectDialogFragment.searchbarHint = "Type here to search.."
         spinnerSingleSelectDialogFragment.setDialogHeight(500.dp)
 
 

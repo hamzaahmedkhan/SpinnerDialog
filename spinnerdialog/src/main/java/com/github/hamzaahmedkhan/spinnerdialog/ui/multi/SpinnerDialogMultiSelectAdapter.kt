@@ -2,7 +2,7 @@ package com.github.hamzaahmedkhan.spinnerdialog.ui.multi
 
 import android.app.Activity
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ class SpinnerDialogMultiSelectAdapter(
     private val context: Context,
     var arrData: ArrayList<SpinnerModel>,
     private val onItemClick: OnSpinnerItemCheckboxClickListener
-) : RecyclerView.Adapter<SpinnerDialogMultiSelectAdapter.ViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<SpinnerDialogMultiSelectAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -63,7 +63,7 @@ class SpinnerDialogMultiSelectAdapter(
         return arrData.size
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         var checkbox: CheckBox
         var txtChoice: TextView
         var contParentLayout: LinearLayout

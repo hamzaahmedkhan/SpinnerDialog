@@ -1,9 +1,9 @@
 package com.github.hamzaahmedkhan.spinnerdialog.ui
 
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -25,7 +25,7 @@ import kotlin.collections.ArrayList
  * Created by khanhamza on 21-Feb-17.
  */
 
-class SpinnerDialogFragment : DialogFragment(),
+class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
     OnSpinnerItemClickListener, View.OnClickListener, OnSpinnerItemCheckboxClickListener {
 
     private var singleSelectAdapter: SpinnerDialogSingleSelectAdapter? = null
@@ -134,9 +134,13 @@ class SpinnerDialogFragment : DialogFragment(),
     }
 
     private fun bindView() {
-        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val mLayoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            context,
+            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            false
+        )
         recyclerView.layoutManager = mLayoutManager
-        (recyclerView.itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
+        (recyclerView.itemAnimator as androidx.recyclerview.widget.DefaultItemAnimator).supportsChangeAnimations = false
         val resId =
             R.anim.layout_animation_fall_bottom
         val animation = AnimationUtils.loadLayoutAnimation(context, resId)
