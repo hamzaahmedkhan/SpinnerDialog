@@ -2,7 +2,7 @@ package com.github.hamzaahmedkhan.spinnerdialog.ui.single
 
 import android.app.Activity
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +21,7 @@ class SpinnerDialogSingleSelectAdapter(
     private val context: Context,
     var arrData: ArrayList<SpinnerModel>,
     private val onItemClick: OnSpinnerItemClickListener
-) : RecyclerView.Adapter<SpinnerDialogSingleSelectAdapter.ViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<SpinnerDialogSingleSelectAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -60,7 +60,7 @@ class SpinnerDialogSingleSelectAdapter(
     }
 
     class ViewHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
+        androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         var radioButton: RadioButton
         var txtChoice: TextView
         var contParentLayout: LinearLayout
