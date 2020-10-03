@@ -53,7 +53,14 @@ class MainActivity : AppCompatActivity() {
         val arraySpinnerModel: ArrayList<SpinnerModel> = ArrayList()
 
         for (i in 1..9) {
-            arraySpinnerModel.add(SpinnerModel("Number $i"))
+            val spinnerModel = SpinnerModel(
+                "Number $i"
+            )
+            spinnerModel.id = i
+            spinnerModel.description = "This is Description of $i"
+            arraySpinnerModel.add(
+                spinnerModel
+            )
         }
 
 
@@ -117,6 +124,7 @@ class MainActivity : AppCompatActivity() {
         spinnerSingleSelectDialogFragment.showSearchBar = true
         spinnerSingleSelectDialogFragment.searchbarHint = "type here to search.."
         spinnerSingleSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT) // for dynamic height you can use Integer.dp e.g setDialogHeight(500.dp) or ViewGroup.LayoutParams.WRAP_CONTENT
+        spinnerSingleSelectDialogFragment.showDescription(true)
 
 
         // Using optional features for multi select dialog
@@ -124,7 +132,8 @@ class MainActivity : AppCompatActivity() {
         spinnerMultiSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
         spinnerMultiSelectDialogFragment.showSearchBar = true
         spinnerMultiSelectDialogFragment.searchbarHint = "type here to search.."
-        spinnerSingleSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT) // for dynamic height you can use Integer.dp e.g setDialogHeight(500.dp) or ViewGroup.LayoutParams.WRAP_CONTENT
+        spinnerMultiSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT) // for dynamic height you can use Integer.dp e.g setDialogHeight(500.dp) or ViewGroup.LayoutParams.WRAP_CONTENT
+        spinnerMultiSelectDialogFragment.showDescription(true)
 
 
 ```
@@ -170,4 +179,4 @@ TestEnum.values().forEach {
 
 **FUTURE RELEASE PLANS**
 
--> Open issues in Release 1.3.0
+-> Open issues for Release 1.3.0

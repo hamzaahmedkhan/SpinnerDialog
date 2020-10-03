@@ -18,8 +18,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="2dp"
-        android:padding="2dp">
+        android:layout_margin="3dp"
+        android:padding="3dp">
 
             <CheckBox
                 android:id="@+id/checkbox"
@@ -27,19 +27,39 @@
                 android:layout_height="match_parent"
                 android:clickable="false" />
 
-            <TextView
-                android:id="@+id/txtChoice"
+        <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:lines="1"
-                android:maxLines="1"
-                android:text="Choice"
-                android:textColor="@color/material_grey800"
-                android:textSize="14sp"  />
+                android:orientation="vertical">
 
+            <TextView
+                    android:id="@+id/txtChoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:text="Choice"
+                    android:textColor="@color/material_grey800"
+                    android:textSize="14sp" />
+
+
+            <TextView
+                    android:id="@+id/txtDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="1dp"
+                    android:maxLines="2"
+                    android:text="Description"
+                    android:textColor="@color/material_grey800"
+                    android:textSize="12sp" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

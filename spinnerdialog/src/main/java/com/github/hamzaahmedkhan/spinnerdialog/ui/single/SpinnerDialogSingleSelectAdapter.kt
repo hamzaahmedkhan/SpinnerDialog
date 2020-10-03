@@ -1,6 +1,7 @@
 package com.github.hamzaahmedkhan.spinnerdialog.ui.single
 
 import android.app.Activity
+import android.content.ClipDescription
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import android.widget.RadioButton
 import android.widget.TextView
 import com.github.hamzaahmedkhan.spinnerdialog.R
 import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerItemClickListener
+import com.github.hamzaahmedkhan.spinnerdialog.extension.gone
+import com.github.hamzaahmedkhan.spinnerdialog.extension.visible
 import com.github.hamzaahmedkhan.spinnerdialog.models.SpinnerModel
 import java.util.*
 
@@ -20,8 +23,9 @@ import java.util.*
 class SpinnerDialogSingleSelectAdapter(
     private val context: Context,
     var arrData: ArrayList<SpinnerModel>,
-    private val onItemClick: OnSpinnerItemClickListener
-) : androidx.recyclerview.widget.RecyclerView.Adapter<SpinnerDialogSingleSelectAdapter.ViewHolder>() {
+    private val onItemClick: OnSpinnerItemClickListener,
+    private val showDescription: Boolean
+) : RecyclerView.Adapter<SpinnerDialogSingleSelectAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -37,17 +41,29 @@ class SpinnerDialogSingleSelectAdapter(
         holder: ViewHolder,
         i: Int
     ) {
-        val model =
-            arrData[holder.adapterPosition]
-        holder.txtChoice.text = model.text
-        holder.radioButton.isChecked = model.isSelected
-        holder.contParentLayout.setOnClickListener { view: View? ->
-            onItemClick.onItemClick(
-                holder.adapterPosition,
-                model,
-                this@SpinnerDialogSingleSelectAdapter
-            )
+        with(holder) {
+            val model =
+                arrData[this.adapterPosition]
+            this.txtChoice.text = model.text
+            this.txtDescription.text = model.description
+
+            // if showDescription is true, set textView visible, else gone
+            if (showDescription) {
+                this.txtDescription.visible()
+            } else {
+                this.txtDescription.gone()
+            }
+
+            this.radioButton.isChecked = model.isSelected
+            this.contParentLayout.setOnClickListener { view: View? ->
+                onItemClick.onItemClick(
+                    this.adapterPosition,
+                    model,
+                    this@SpinnerDialogSingleSelectAdapter
+                )
+            }
         }
+
     }
 
     fun addItem(homeCategories: ArrayList<SpinnerModel>) {
@@ -60,14 +76,16 @@ class SpinnerDialogSingleSelectAdapter(
     }
 
     class ViewHolder(itemView: View) :
-        androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+        RecyclerView.ViewHolder(itemView) {
         var radioButton: RadioButton
         var txtChoice: TextView
+        var txtDescription: TextView
         var contParentLayout: LinearLayout
 
         init {
             radioButton = itemView.findViewById(R.id.radioButton)
             txtChoice = itemView.findViewById(R.id.txtChoice)
+            txtDescription = itemView.findViewById(R.id.txtDescription)
             contParentLayout = itemView.findViewById(R.id.contParentLayout)
         }
     }

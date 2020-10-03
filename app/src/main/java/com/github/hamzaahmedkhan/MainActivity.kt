@@ -19,16 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val arraySpinnerModel: ArrayList<SpinnerModel> = ArrayList()
-
-        for (i in 1..9) {
-            arraySpinnerModel.add(
-                SpinnerModel(
-                    "Number $i"
-                )
-            )
-        }
-
+        val arraySpinnerModel = Constants.sampleDataWithDescription()
 
         // Init single select Fragment
         val spinnerSingleSelectDialogFragment =
@@ -79,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         spinnerSingleSelectDialogFragment.showSearchBar = true
         spinnerSingleSelectDialogFragment.searchbarHint = "Type here to search.."
         spinnerSingleSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT)
+        spinnerSingleSelectDialogFragment.showDescription(true)
 
 
         // Using optional features for multi select dialog
@@ -86,7 +78,8 @@ class MainActivity : AppCompatActivity() {
         spinnerMultiSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
         spinnerMultiSelectDialogFragment.showSearchBar = true
         spinnerMultiSelectDialogFragment.searchbarHint = "Type here to search.."
-        spinnerSingleSelectDialogFragment.setDialogHeight(500.dp)
+        spinnerMultiSelectDialogFragment.setDialogHeight(500.dp)
+        spinnerMultiSelectDialogFragment.showDescription(true)
 
 
         txtShowSingleChoiceSpinner.setOnClickListener { spinnerSingleSelectDialogFragment.show(supportFragmentManager, "SpinnerDialogFragmentSingle") }
