@@ -3,7 +3,7 @@ Android Spinner Dialog Library, Use for single or multi selection of choice
 
 [![](https://jitpack.io/v/hamzaahmedkhan/SpinnerDialog.svg)](https://jitpack.io/#hamzaahmedkhan/SpinnerDialog)
 
-[ ![Download](https://api.bintray.com/packages/hamzaahmedkhan/SpinnerDialog/SpinnerDialog/images/download.svg?version=v1.2.2) ](https://bintray.com/hamzaahmedkhan/SpinnerDialog/SpinnerDialog/v1.2.2/link)
+[ ![Download](https://api.bintray.com/packages/hamzaahmedkhan/SpinnerDialog/SpinnerDialog/images/download.svg?version=v1.2.3) ](https://bintray.com/hamzaahmedkhan/SpinnerDialog/SpinnerDialog/v1.2.3/link)
 
 
 
@@ -11,17 +11,15 @@ Android Spinner Dialog Library, Use for single or multi selection of choice
 
 <img src='demo/home.png' height=480 width=240 />
 
-
-<img src='demo/list_0.png' height=480 width=240 />
-
-
 <img src='demo/list_1.png' height=480 width=240 />
-
 
 <img src='demo/list_2.png' height=480 width=240 />
 
-
 <img src='demo/list_3.png' height=480 width=240 />
+
+<img src='demo/list_4.png' height=480 width=240 />
+
+<img src='demo/list_5.png' height=480 width=240 />
 
 
 ## Download
@@ -31,7 +29,7 @@ To include `SpinnerDialog` in your project, add the following to your dependenci
 **app/build.gradle**
 ```groovy
 dependencies {
-        implementation 'com.github.hamzaahmedkhan:SpinnerDialog:v1.2.2'
+        implementation 'com.github.hamzaahmedkhan:SpinnerDialog:v1.2.3'
 }
 ```
 
@@ -49,12 +47,37 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        // INITIALZE DATA
         val arraySpinnerModel: ArrayList<SpinnerModel> = ArrayList()
 
         for (i in 1..9) {
-            arraySpinnerModel.add(SpinnerModel("Number $i"))
+            val spinnerModel = SpinnerModel(
+                "Number $i"
+            )
+            spinnerModel.id = i
+            arraySpinnerModel.add(
+                spinnerMode
+            )
         }
+
+
+    // EXTRA PROPERTIES OF SPINNER MODEL
+
+        // User can set ImageType as Circle or Square
+        spinnerModel.imageType = ImageType.IMAGE_CIRCLE
+        spinnerModel.imageType = ImageType.IMAGE_SQUARE
+
+        // User can set Description text
+        spinnerModel.description = "This is Description of $i"
+
+        // To set Image Path (Either URL or from Drawable Resources), priority will be given to Res ID. If resID not provided then it will load image from URL
+        spinnerModel.imagePath("https://homepages.cae.wisc.edu/~ece533/images/airplane.png")
+        spinnerModel.imagePath(R.drawable.img_bird)
+
+
+
+
+
 
 
         // Init single select Fragment
@@ -117,6 +140,8 @@ class MainActivity : AppCompatActivity() {
         spinnerSingleSelectDialogFragment.showSearchBar = true
         spinnerSingleSelectDialogFragment.searchbarHint = "type here to search.."
         spinnerSingleSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT) // for dynamic height you can use Integer.dp e.g setDialogHeight(500.dp) or ViewGroup.LayoutParams.WRAP_CONTENT
+        spinnerSingleSelectDialogFragment.showDescription(true)
+        spinnerSingleSelectDialogFragment.showImage(true)
 
 
         // Using optional features for multi select dialog
@@ -124,7 +149,9 @@ class MainActivity : AppCompatActivity() {
         spinnerMultiSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
         spinnerMultiSelectDialogFragment.showSearchBar = true
         spinnerMultiSelectDialogFragment.searchbarHint = "type here to search.."
-        spinnerSingleSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT) // for dynamic height you can use Integer.dp e.g setDialogHeight(500.dp) or ViewGroup.LayoutParams.WRAP_CONTENT
+        spinnerMultiSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT) // for dynamic height you can use Integer.dp e.g setDialogHeight(500.dp) or ViewGroup.LayoutParams.WRAP_CONTENT
+        spinnerMultiSelectDialogFragment.showDescription(true)
+        spinnerMultiSelectDialogFragment.showImage(true)
 
 
 ```
@@ -170,4 +197,4 @@ TestEnum.values().forEach {
 
 **FUTURE RELEASE PLANS**
 
--> Open issues in Release 1.3.0
+-> Open issues for Release 1.3.0

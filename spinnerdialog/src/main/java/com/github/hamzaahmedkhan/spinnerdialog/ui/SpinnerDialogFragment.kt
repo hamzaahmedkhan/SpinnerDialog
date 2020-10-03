@@ -1,9 +1,6 @@
 package com.github.hamzaahmedkhan.spinnerdialog.ui
 
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -46,12 +43,14 @@ class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
     var spinnerSelectionType =
         SpinnerSelectionType.SINGLE_SELECTION
     private var dialogHeight = ViewGroup.LayoutParams.MATCH_PARENT
+    private var showDescription: Boolean = false
+    private var showChoiceImage: Boolean = false
+
 
     override fun onStart() {
         super.onStart()
 
-        dialog.window!!
-            .setLayout(
+        dialog?.window?.setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 dialogHeight
             )
@@ -108,10 +107,12 @@ class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
                 SpinnerDialogSingleSelectAdapter(
                     context!!,
                     arrFilteredData,
-                    this
+                    this,
+                    showDescription,
+                    showChoiceImage
                 )
         } else {
-            multiSelectAdapter = SpinnerDialogMultiSelectAdapter(context!!, arrFilteredData, this)
+            multiSelectAdapter = SpinnerDialogMultiSelectAdapter(context!!, arrFilteredData, this, showDescription, showChoiceImage)
         }
 
         bindView()
@@ -140,7 +141,8 @@ class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
             false
         )
         recyclerView.layoutManager = mLayoutManager
-        (recyclerView.itemAnimator as androidx.recyclerview.widget.DefaultItemAnimator).supportsChangeAnimations = false
+        (recyclerView.itemAnimator as androidx.recyclerview.widget.DefaultItemAnimator).supportsChangeAnimations =
+            false
         val resId =
             R.anim.layout_animation_fall_bottom
         val animation = AnimationUtils.loadLayoutAnimation(context, resId)
@@ -260,13 +262,39 @@ class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
      * You can use extension #{IntegerExtension.Int.dp} to convert integer value into dp. Example 500.dp
      */
     fun setDialogHeight(height: Int) {
-        dialogHeight = if (height == ViewGroup.LayoutParams.MATCH_PARENT || height == ViewGroup.LayoutParams.WRAP_CONTENT) {
-            height
-        } else if (height < 0) {
-            ViewGroup.LayoutParams.MATCH_PARENT
-        } else {
-            height
-        }
+        dialogHeight =
+            if (height == ViewGroup.LayoutParams.MATCH_PARENT || height == ViewGroup.LayoutParams.WRAP_CONTENT) {
+                height
+            } else if (height < 0) {
+                ViewGroup.LayoutParams.MATCH_PARENT
+            } else {
+                height
+            }
+    }
+
+    /**
+     *  Set true if you want to show description, else false.
+     *
+     *  If true, it will show description which is provided in {@link SpinnerModel#description}
+     *
+     *  Default value is false
+     *
+     */
+    fun showDescription(showDescription: Boolean) {
+        this.showDescription = showDescription
+    }
+
+
+    /**
+     *  Set true if you want to show Image for choices, else false.
+     *
+     *  If true, it will show image which is provided in {@link SpinnerModel#imagePath}. User can also set ImageType.
+     *
+     *  Default value is false
+     *
+     */
+    fun showImage(showChoiceImage: Boolean) {
+        this.showChoiceImage = showChoiceImage
     }
 
 
