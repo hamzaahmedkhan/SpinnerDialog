@@ -11,17 +11,15 @@ Android Spinner Dialog Library, Use for single or multi selection of choice
 
 <img src='demo/home.png' height=480 width=240 />
 
-
-<img src='demo/list_0.png' height=480 width=240 />
-
-
 <img src='demo/list_1.png' height=480 width=240 />
-
 
 <img src='demo/list_2.png' height=480 width=240 />
 
-
 <img src='demo/list_3.png' height=480 width=240 />
+
+<img src='demo/list_4.png' height=480 width=240 />
+
+<img src='demo/list_5.png' height=480 width=240 />
 
 
 ## Download
@@ -49,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        // INITIALZE DATA
         val arraySpinnerModel: ArrayList<SpinnerModel> = ArrayList()
 
         for (i in 1..9) {
@@ -57,11 +55,29 @@ class MainActivity : AppCompatActivity() {
                 "Number $i"
             )
             spinnerModel.id = i
-            spinnerModel.description = "This is Description of $i"
             arraySpinnerModel.add(
-                spinnerModel
+                spinnerMode
             )
         }
+
+
+    // EXTRA PROPERTIES OF SPINNER MODEL
+
+        // User can set ImageType as Circle or Square
+        spinnerModel.imageType = ImageType.IMAGE_CIRCLE
+        spinnerModel.imageType = ImageType.IMAGE_SQUARE
+
+        // User can set Description text
+        spinnerModel.description = "This is Description of $i"
+
+        // To set Image Path (Either URL or from Drawable Resources), priority will be given to Res ID. If resID not provided then it will load image from URL
+        spinnerModel.imagePath("https://homepages.cae.wisc.edu/~ece533/images/airplane.png")
+        spinnerModel.imagePath(R.drawable.img_bird)
+
+
+
+
+
 
 
         // Init single select Fragment
@@ -125,6 +141,7 @@ class MainActivity : AppCompatActivity() {
         spinnerSingleSelectDialogFragment.searchbarHint = "type here to search.."
         spinnerSingleSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT) // for dynamic height you can use Integer.dp e.g setDialogHeight(500.dp) or ViewGroup.LayoutParams.WRAP_CONTENT
         spinnerSingleSelectDialogFragment.showDescription(true)
+        spinnerSingleSelectDialogFragment.showImage(true)
 
 
         // Using optional features for multi select dialog
@@ -134,6 +151,7 @@ class MainActivity : AppCompatActivity() {
         spinnerMultiSelectDialogFragment.searchbarHint = "type here to search.."
         spinnerMultiSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT) // for dynamic height you can use Integer.dp e.g setDialogHeight(500.dp) or ViewGroup.LayoutParams.WRAP_CONTENT
         spinnerMultiSelectDialogFragment.showDescription(true)
+        spinnerMultiSelectDialogFragment.showImage(true)
 
 
 ```

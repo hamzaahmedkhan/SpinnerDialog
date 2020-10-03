@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.TextView
+import coil.load
+import coil.request.CachePolicy
+import coil.transform.CircleCropTransformation
 import com.github.hamzaahmedkhan.spinnerdialog.R
 import com.github.hamzaahmedkhan.spinnerdialog.callbacks.OnSpinnerItemClickListener
+import com.github.hamzaahmedkhan.spinnerdialog.enums.ImageType
 import com.github.hamzaahmedkhan.spinnerdialog.extension.gone
 import com.github.hamzaahmedkhan.spinnerdialog.extension.visible
 import com.github.hamzaahmedkhan.spinnerdialog.models.SpinnerModel
@@ -24,7 +29,8 @@ class SpinnerDialogSingleSelectAdapter(
     private val context: Context,
     var arrData: ArrayList<SpinnerModel>,
     private val onItemClick: OnSpinnerItemClickListener,
-    private val showDescription: Boolean
+    private val showDescription: Boolean,
+    private val showImage: Boolean
 ) : RecyclerView.Adapter<SpinnerDialogSingleSelectAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -54,6 +60,8 @@ class SpinnerDialogSingleSelectAdapter(
                 this.txtDescription.gone()
             }
 
+            loadImage(model)
+
             this.radioButton.isChecked = model.isSelected
             this.contParentLayout.setOnClickListener { view: View? ->
                 onItemClick.onItemClick(
@@ -64,6 +72,64 @@ class SpinnerDialogSingleSelectAdapter(
             }
         }
 
+    }
+
+    private fun ViewHolder.loadImage(
+        model: SpinnerModel
+    ) {
+        if (showImage) {
+            this.imgIcon.visible()
+
+            when (model.imageType) {
+                ImageType.IMAGE_CIRCLE -> {
+
+                    if (model.getImagePathResId() != -1) {
+                        imgIcon.load(model.getImagePathResId()) {
+                            crossfade(true)
+                            transformations(CircleCropTransformation())
+                            networkCachePolicy(CachePolicy.ENABLED)
+                            diskCachePolicy(CachePolicy.ENABLED)
+                            placeholder(R.drawable.img_placeholder)
+                            error(R.drawable.img_error)
+                            build()
+                        }
+                    } else {
+                        imgIcon.load(model.getImagePathURL()) {
+                            crossfade(true)
+                            transformations(CircleCropTransformation())
+                            networkCachePolicy(CachePolicy.ENABLED)
+                            diskCachePolicy(CachePolicy.ENABLED)
+                            placeholder(R.drawable.img_placeholder)
+                            error(R.drawable.img_error)
+                            build()
+                        }
+                    }
+                }
+                ImageType.IMAGE_SQUARE -> {
+                    if (model.getImagePathResId() != -1) {
+                        imgIcon.load(model.getImagePathResId()) {
+                            crossfade(true)
+                            networkCachePolicy(CachePolicy.ENABLED)
+                            diskCachePolicy(CachePolicy.ENABLED)
+                            placeholder(R.drawable.img_placeholder)
+                            error(R.drawable.img_error)
+                            build()
+                        }
+                    } else {
+                        imgIcon.load(model.getImagePathURL()) {
+                            crossfade(true)
+                            networkCachePolicy(CachePolicy.ENABLED)
+                            diskCachePolicy(CachePolicy.ENABLED)
+                            placeholder(R.drawable.img_placeholder)
+                            error(R.drawable.img_error)
+                            build()
+                        }
+                    }
+                }
+            }
+        } else {
+            this.imgIcon.gone()
+        }
     }
 
     fun addItem(homeCategories: ArrayList<SpinnerModel>) {
@@ -81,12 +147,14 @@ class SpinnerDialogSingleSelectAdapter(
         var txtChoice: TextView
         var txtDescription: TextView
         var contParentLayout: LinearLayout
+        var imgIcon: ImageView
 
         init {
             radioButton = itemView.findViewById(R.id.radioButton)
             txtChoice = itemView.findViewById(R.id.txtChoice)
             txtDescription = itemView.findViewById(R.id.txtDescription)
             contParentLayout = itemView.findViewById(R.id.contParentLayout)
+            imgIcon = itemView.findViewById(R.id.imgIcon)
         }
     }
 

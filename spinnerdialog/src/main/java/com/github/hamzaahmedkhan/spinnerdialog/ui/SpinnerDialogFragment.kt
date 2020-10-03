@@ -44,13 +44,13 @@ class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
         SpinnerSelectionType.SINGLE_SELECTION
     private var dialogHeight = ViewGroup.LayoutParams.MATCH_PARENT
     private var showDescription: Boolean = false
+    private var showChoiceImage: Boolean = false
 
 
     override fun onStart() {
         super.onStart()
 
-        dialog.window!!
-            .setLayout(
+        dialog?.window?.setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 dialogHeight
             )
@@ -108,10 +108,11 @@ class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
                     context!!,
                     arrFilteredData,
                     this,
-                    showDescription
+                    showDescription,
+                    showChoiceImage
                 )
         } else {
-            multiSelectAdapter = SpinnerDialogMultiSelectAdapter(context!!, arrFilteredData, this, showDescription)
+            multiSelectAdapter = SpinnerDialogMultiSelectAdapter(context!!, arrFilteredData, this, showDescription, showChoiceImage)
         }
 
         bindView()
@@ -281,6 +282,19 @@ class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
      */
     fun showDescription(showDescription: Boolean) {
         this.showDescription = showDescription
+    }
+
+
+    /**
+     *  Set true if you want to show Image for choices, else false.
+     *
+     *  If true, it will show image which is provided in {@link SpinnerModel#imagePath}. User can also set ImageType.
+     *
+     *  Default value is false
+     *
+     */
+    fun showImage(showChoiceImage: Boolean) {
+        this.showChoiceImage = showChoiceImage
     }
 
 
