@@ -3,6 +3,7 @@ package com.github.hamzaahmedkhan.spinnerdialog.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,8 @@ class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
     var showSearchBar = true
     var spinnerSelectionType =
         SpinnerSelectionType.SINGLE_SELECTION
+    private var imageWidth: Int? = null
+    private var imageHeight: Int? = null
     private var dialogHeight = ViewGroup.LayoutParams.MATCH_PARENT
     private var showDescription: Boolean = false
     private var showChoiceImage: Boolean = false
@@ -109,10 +112,12 @@ class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
                     arrFilteredData,
                     this,
                     showDescription,
-                    showChoiceImage
+                    showChoiceImage,
+                    imageWidth = imageWidth,
+                    imageHeight = imageHeight
                 )
         } else {
-            multiSelectAdapter = SpinnerDialogMultiSelectAdapter(context!!, arrFilteredData, this, showDescription, showChoiceImage)
+            multiSelectAdapter = SpinnerDialogMultiSelectAdapter(context!!, arrFilteredData, this, showDescription, showChoiceImage, imageWidth, imageHeight)
         }
 
         bindView()
@@ -225,7 +230,9 @@ class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
             title: String,
             arrData: ArrayList<SpinnerModel>,
             onSpinnerOKPressedListener: OnSpinnerOKPressedListener,
-            scrollToPosition: Int
+            scrollToPosition: Int,
+            imageWidth: Int? = null,
+            imageHeight: Int? = null
         ): SpinnerDialogFragment {
             val frag =
                 SpinnerDialogFragment()
@@ -235,6 +242,8 @@ class SpinnerDialogFragment : androidx.fragment.app.DialogFragment(),
             frag.arrFilteredData.addAll(arrData)
             frag.scrollToPosition = scrollToPosition
             frag.onSpinnerOKPressedListener = onSpinnerOKPressedListener
+            frag.imageWidth = imageWidth
+            frag.imageHeight = imageHeight
             frag.arguments = args
             frag.spinnerSelectionType = spinnerSelectionType
 
