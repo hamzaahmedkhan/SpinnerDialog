@@ -60,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:padding="1dp"
+                    android:inputType="text"
                     android:textColor="@color/material_grey900"
                     android:hint="Type here to search.."
                     android:layout_weight="1" />
