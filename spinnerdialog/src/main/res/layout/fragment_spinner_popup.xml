@@ -67,6 +67,13 @@
 
         </LinearLayout>
 
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/material_grey300"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
+
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"

@@ -8,12 +8,6 @@
         android:orientation="vertical">
 
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/material_grey300"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp" />
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -77,5 +71,12 @@
 
     </LinearLayout>
 
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_grey300"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" />
 
 </LinearLayout>
