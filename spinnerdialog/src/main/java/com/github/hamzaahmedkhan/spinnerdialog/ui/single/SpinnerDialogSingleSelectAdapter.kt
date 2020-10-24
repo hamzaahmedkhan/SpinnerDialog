@@ -1,16 +1,12 @@
 package com.github.hamzaahmedkhan.spinnerdialog.ui.single
 
-import android.app.Activity
-import android.content.ClipDescription
 import android.content.Context
+import android.util.Size
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RadioButton
-import android.widget.TextView
+import android.widget.*
 import coil.load
 import coil.request.CachePolicy
 import coil.transform.CircleCropTransformation
@@ -30,7 +26,9 @@ class SpinnerDialogSingleSelectAdapter(
     var arrData: ArrayList<SpinnerModel>,
     private val onItemClick: OnSpinnerItemClickListener,
     private val showDescription: Boolean,
-    private val showImage: Boolean
+    private val showImage: Boolean,
+    private val imageWidth: Int?,
+    private val imageHeight: Int?
 ) : RecyclerView.Adapter<SpinnerDialogSingleSelectAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -127,6 +125,14 @@ class SpinnerDialogSingleSelectAdapter(
                     }
                 }
             }
+
+
+
+            imgIcon.layoutParams.apply {
+                imageWidth?.let { width = it }
+                imageHeight?.let { height = it }
+            }
+            
         } else {
             this.imgIcon.gone()
         }

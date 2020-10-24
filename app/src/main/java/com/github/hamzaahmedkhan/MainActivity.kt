@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         // Init single select Fragment
         val spinnerSingleSelectDialogFragment =
             SpinnerDialogFragment.newInstance(
-                SpinnerSelectionType.SINGLE_SELECTION,"Spinner Dialog", arraySpinnerModel,
+                SpinnerSelectionType.SINGLE_SELECTION, "Spinner Dialog", arraySpinnerModel,
                 object :
                     OnSpinnerOKPressedListener {
                     override fun onSingleSelection(data: SpinnerModel, selectedPosition: Int) {
@@ -38,14 +38,15 @@ class MainActivity : AppCompatActivity() {
                         // It will never send Multi selection data in SINGLE_SELECTION Mode
                     }
 
-                }, 0
+                }, 0,
+                200, 200
             )
 
 
         // Init multi select Fragment
         val spinnerMultiSelectDialogFragment =
             SpinnerDialogFragment.newInstance(
-                SpinnerSelectionType.MULTI_SELECTION,"Spinner Dialog", arraySpinnerModel,
+                SpinnerSelectionType.MULTI_SELECTION, "Spinner Dialog", arraySpinnerModel,
                 object :
                     OnSpinnerOKPressedListener {
                     override fun onSingleSelection(data: SpinnerModel, selectedPosition: Int) {
@@ -56,17 +57,21 @@ class MainActivity : AppCompatActivity() {
                         data: List<SpinnerModel>,
                         selectedPosition: Int
                     ) {
-                        Toast.makeText(applicationContext, data.map { it.text }.joinToString(" - "), Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            applicationContext,
+                            data.map { it.text }.joinToString(" - "),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
 
-                }, 0
+                }, 0, 300, 300
             )
-
 
 
         // Using optional features for single select dialog
         spinnerSingleSelectDialogFragment.buttonText = "DONE"
-        spinnerSingleSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
+        spinnerSingleSelectDialogFragment.themeColorResId =
+            resources.getColor(R.color.material_pink500)
         spinnerSingleSelectDialogFragment.showSearchBar = true
         spinnerSingleSelectDialogFragment.searchbarHint = "Type here to search.."
         spinnerSingleSelectDialogFragment.setDialogHeight(ViewGroup.LayoutParams.MATCH_PARENT)
@@ -76,7 +81,8 @@ class MainActivity : AppCompatActivity() {
 
         // Using optional features for multi select dialog
         spinnerMultiSelectDialogFragment.buttonText = "DONE"
-        spinnerMultiSelectDialogFragment.themeColorResId = resources.getColor(R.color.material_pink500)
+        spinnerMultiSelectDialogFragment.themeColorResId =
+            resources.getColor(R.color.material_pink500)
         spinnerMultiSelectDialogFragment.showSearchBar = true
         spinnerMultiSelectDialogFragment.searchbarHint = "Type here to search.."
         spinnerMultiSelectDialogFragment.setDialogHeight(500.dp)
@@ -84,7 +90,17 @@ class MainActivity : AppCompatActivity() {
         spinnerMultiSelectDialogFragment.showImage(true)
 
 
-        txtShowSingleChoiceSpinner.setOnClickListener { spinnerSingleSelectDialogFragment.show(supportFragmentManager, "SpinnerDialogFragmentSingle") }
-        txtShowMultiChoiceSpinner.setOnClickListener { spinnerMultiSelectDialogFragment.show(supportFragmentManager, "SpinnerDialogFragmentMulti") }
+        txtShowSingleChoiceSpinner.setOnClickListener {
+            spinnerSingleSelectDialogFragment.show(
+                supportFragmentManager,
+                "SpinnerDialogFragmentSingle"
+            )
+        }
+        txtShowMultiChoiceSpinner.setOnClickListener {
+            spinnerMultiSelectDialogFragment.show(
+                supportFragmentManager,
+                "SpinnerDialogFragmentMulti"
+            )
+        }
     }
 }

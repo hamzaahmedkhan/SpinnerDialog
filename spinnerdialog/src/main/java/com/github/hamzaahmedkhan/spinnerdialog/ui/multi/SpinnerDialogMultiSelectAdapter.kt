@@ -28,7 +28,9 @@ class SpinnerDialogMultiSelectAdapter(
     var arrData: ArrayList<SpinnerModel>,
     private val onItemClick: OnSpinnerItemCheckboxClickListener,
     private val showDescription: Boolean,
-    private val showImage: Boolean
+    private val showImage: Boolean,
+    private val imageWidth: Int?,
+    private val imageHeight: Int?
 ) : androidx.recyclerview.widget.RecyclerView.Adapter<SpinnerDialogMultiSelectAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -127,6 +129,11 @@ class SpinnerDialogMultiSelectAdapter(
                         }
                     }
                 }
+            }
+
+            imgIcon.layoutParams.apply {
+                imageWidth?.let { width = it }
+                imageHeight?.let { height = it }
             }
         } else {
             this.imgIcon.gone()
